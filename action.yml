@@ -1,0 +1,30 @@
+name: 'Set Stage Column '
+description: 'Moves project card to proper design stage column when stage label is updated'
+inputs:
+  issue-number:  # input: issue number
+    description: 'number of the issue'
+    required: true
+    default: '1'
+  new-label:  # input: new label name
+    description: 'name of the label'
+    required: true
+    default: 'triage'
+  repo-id:  # id of input
+    description: 'info for repo'
+    required: true
+    default: 'ego'
+  repo-name:  # id of input
+    description: 'info for repo'
+    required: true
+    default: 'what'
+  repo-owner:  # id of input
+    description: 'info for repo'
+    required: true
+    default: 'who'
+  repo-token:  # id of input
+    description: 'info for repo'
+    required: true
+    default: 'shhh'
+runs:
+  using: 'node12'
+  main: 'index.js'

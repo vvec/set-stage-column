@@ -1,0 +1,35 @@
+# workflow definition
+name: Set Column
+
+# workflow trigger definition
+on: 
+  issues:
+    types: [labeled]
+    # @todo: filter stage labels
+
+# workflow job(s) definition
+jobs:
+  job-1:
+    if: contains(github.event.label.name, '3:')
+    # define platform required for job
+    runs-on: ubuntu-latest
+    # description of function performed by the job
+    name: move project cards to ${{github.event.label.name}}
+    # steps executed by job
+    steps:
+    # - run: echo "Git hub context ${{toJson(github.event)}}"  # [debug] dump trigger event context info
+
+    # execute job action(s)
+    - name: set stage column
+      id: set-column
+      # call script defined in <owner>/<repo>/<script> and by @<release> or @<branch>
+      uses: vvec/set-stage-column@main
+      # with parameters defined ../<repo>/<script>/action.yml
+      with:
+        repo-token: ${{secrets.GITHUB_TOKEN}}
+        repo-id: ${{github.event.repository.node_id}}
+        repo-name: ${{github.event.repository.name}}
+        repo-owner: ${{github.event.repository.owner.login}}
+        issue-number: ${{github.event.issue.number}}
+        new-label: ${{github.event.label.name}}
+
