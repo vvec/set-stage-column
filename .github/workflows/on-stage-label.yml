@@ -18,7 +18,9 @@ jobs:
     # steps executed by job
     steps:
     # - run: echo "Git hub context ${{toJson(github.event)}}"  # [debug] dump trigger event context info
-
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14'
     # execute job action(s)
     - name: set stage column
       id: set-column
